@@ -12,20 +12,20 @@ package ConquestFlex.common.useful
 	public class AutoPoint extends Point
 	{
 		/** 親オブジェクト */
-		private var parent_event:EventDispatcher = null;
+		private var parent_event:EventDispatcher	= null;
 		/** 移動前位置 */
-		private var prev_pos:Point = null;
+		private var prev_pos:Point					= null;
 		/** 移動先位置 */
-		private var next_pos:Point = null;
+		private var next_pos:Point					= null;
 		/** イージング値 */
-		private var easing_value:Number = 0;
+		private var easing_value:Number				= 0;
 		
 		/** 動作経過時間 */
-		private var move_frame:int = 0;
+		private var move_frame:int					= 0;
 		/** 動作時間 */
-		private var max_move_frame:int = 0;
+		private var max_move_frame:int				= 0;
 		/** 動作中確認 */
-		private var b_move:Boolean = false;
+		private var b_move:Boolean					= false;
 		
 		/**
 		 * コンストラクタ

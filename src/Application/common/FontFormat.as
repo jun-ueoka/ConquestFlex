@@ -10,7 +10,7 @@ package Application.common
 	public class FontFormat extends UtilFont
 	{
 		/** デフォルトフォント */
-		public static const FONT_DEFOULT:String = "ＭＳ ゴシック";
+		public static const FONT_DEFOULT:String	= "ＭＳ ゴシック";
 		
 		/**
 		 * ダメージ表示用のフォーマット取得

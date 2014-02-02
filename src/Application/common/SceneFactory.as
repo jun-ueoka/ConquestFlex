@@ -10,7 +10,7 @@ package Application.common
 	public class SceneFactory implements SceneFactoryBase
 	{
 		/** メインシーン */
-		public static const SCENE_MAIN:int = 1;
+		public static const SCENE_MAIN:int	= 1;
 		
 		/**
 		 * シーンクラス生成

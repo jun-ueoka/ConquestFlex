@@ -8,10 +8,10 @@ package Application
 	public class ApplicationData
 	{
 		/** 共通インスタンス */
-		static private var instance:ApplicationData = null;
+		static private var instance:ApplicationData		= null;
 		
 		/** マウスイベント共通キー */
-		static public const MOUSE_EVENT_KEY_MAIN:String = 'main';
+		static public const MOUSE_EVENT_KEY_MAIN:String	= 'main';
 		
 		/**
 		 * インスタンス生成

@@ -14,7 +14,13 @@ package ConquestFlex.graphics
 	 */
 	public class GraphicShape
 	{
-		//四角のシェイプを矩形情報で生成
+		/**
+		 * 四角のシェイプを矩形情報で生成
+		 * @param	in_rect
+		 * @param	in_color
+		 * @param	in_alpha
+		 * @return
+		 */
 		static public function createSquare(in_rect:Rectangle, in_color:uint = 0x000000, in_alpha:Number = 1):Shape
 		{
 			//マスク用シェープ
@@ -29,7 +35,13 @@ package ConquestFlex.graphics
 			return tmp;
 		}
 		
-		//四角のビットマップを矩形情報で生成
+		/**
+		 * 四角のビットマップを矩形情報で生成
+		 * @param	in_rect
+		 * @param	in_color
+		 * @param	in_alpha
+		 * @return
+		 */
 		static public function createBitmapSquare(in_rect:Rectangle, in_color:uint = 0x000000, in_alpha:Number = 1):Bitmap
 		{
 			//マスク用シェープ
@@ -39,7 +51,11 @@ package ConquestFlex.graphics
 			return new Bitmap(tmp_bitmap);
 		}
 		
-		//MovieClipからgraphic情報を取り出し、シェイプとする
+		/**
+		 * MovieClipからgraphic情報を取り出し、シェイプとする
+		 * @param	in_sprite
+		 * @return
+		 */
 		static public function pickOutShapeBySprite(in_sprite:Sprite):Shape
 		{
 			var tmp:Shape = new Shape();
@@ -47,7 +63,11 @@ package ConquestFlex.graphics
 			return tmp;
 		}
 		
-		//シェープの複製
+		/**
+		 * シェープの複製
+		 * @param	in_shape
+		 * @return
+		 */
 		static public function copyShape(in_shape:Shape):Shape
 		{
 			var tmp:Shape = new Shape();
@@ -55,7 +75,12 @@ package ConquestFlex.graphics
 			return tmp;
 		}
 		
-		//グラデーション付き円シェイプ作成
+		/**
+		 * グラデーション付き円シェイプ作成
+		 * @param	in_diameter
+		 * @param	in_color
+		 * @return
+		 */
 		static public function createCircle(in_diameter:Number, in_color:Array):Shape
 		{
 			var tmp:Shape = new Shape();
@@ -67,13 +92,21 @@ package ConquestFlex.graphics
 			return tmp;
 		}
 		
-		//色の配列から均等にアルファを設定した配列を生成(グラデーション用)
+		/**
+		 * 色の配列から均等にアルファを設定した配列を生成(グラデーション用)
+		 * @param	in_color
+		 * @return
+		 */
 		static public function createAlphaArrayByColor(in_color:Array):Array
 		{
 			return UtilCalc.createRatioArray(in_color.length).reverse();
 		}
 		
-		//色の配列から均等に色配置した配列を生成(グラデーション用)
+		/**
+		 * 色の配列から均等に色配置した配列を生成(グラデーション用)
+		 * @param	in_color
+		 * @return
+		 */
 		static public function createColorPositionArrayByColor(in_color:Array):Array
 		{
 			return UtilCalc.createRatioArrayMinToMax(in_color.length, 0, 255);

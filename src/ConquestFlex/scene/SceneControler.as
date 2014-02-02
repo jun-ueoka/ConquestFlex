@@ -7,27 +7,34 @@ package ConquestFlex.scene
 	 */
 	public class SceneControler
 	{
-		//共通インスタンス
-		static private var instance:SceneControler = null;
+		/* 共通インスタンス */
+		static private var instance:SceneControler		= null;
 		
-		//
-		private var scene_factory:SceneFactoryBase = null;
-		//
-		private var v_scene_ids:Vector.<int> = new Vector.<int>;
-		//
-		private var v_scene_params:Vector.<Object> = new Vector.<Object>;
-		//
-		private var now_scene:SceneBase = null;
-		//
-		private var b_update:Boolean = false;
+		/* シーン発行インスタンス格納先(SceneFactoryBaseを継承したクラスのインスタンスを設定する) */
+		private var scene_factory:SceneFactoryBase		= null;
+		/* シーンID */
+		private var v_scene_ids:Vector.<int>			= new Vector.<int>;
+		/* シーン発行時ステータス */
+		private var v_scene_params:Vector.<Object>		= new Vector.<Object>;
+		/* 現在のシーンのインスタンスを保持しておく */
+		private var now_scene:SceneBase					= null;
+		/* 更新確認スイッチ */
+		private var b_update:Boolean					= false;
 		
-		//コンストラクタ
+		/**
+		 * コンストラクタ
+		 * @param	in_scene_factory
+		 */
 		public function SceneControler(in_scene_factory:SceneFactoryBase):void
 		{
 			scene_factory = in_scene_factory;
 		}
 		
-		//インスタンス生成
+		/**
+		 * インスタンス生成
+		 * @param	in_scene_factory
+		 * @return
+		 */
 		static public function createInstance(in_scene_factory:SceneFactoryBase = null):SceneControler
 		{
 			if (instance == null)
@@ -37,7 +44,11 @@ package ConquestFlex.scene
 			return instance;
 		}
 		
-		//シーン挿入
+		/**
+		 * シーン挿入
+		 * @param	in_scene_id
+		 * @param	obj
+		 */
 		public function push(in_scene_id:int, obj:Object = null):void
 		{
 			b_update = true; //スタックの状況が変更した
@@ -45,7 +56,10 @@ package ConquestFlex.scene
 			v_scene_params.push(obj);
 		}
 		
-		//シーン破棄
+		/**
+		 * シーン破棄
+		 * @param	obj
+		 */
 		public function pop(obj:Object = null):void
 		{
 			b_update = true; //スタックの状況が変更した
@@ -58,7 +72,11 @@ package ConquestFlex.scene
 			}
 		}
 		
-		//シーン取得
+		/**
+		 * シーン取得
+		 * @param	in_canvas
+		 * @return
+		 */
 		public function getScene(in_canvas:Sprite):SceneBase
 		{
 			if (b_update)

@@ -24,10 +24,10 @@ package Application.scene
 		private static const ACT_END:int	= 100;
 		
 		/** 中枢データ */
-		public var game_data:ApplicationData = null;
+		public var game_data:ApplicationData	= null;
 		
 		/** Hallo World　テキスト */
-		private var hallo_world:MovieClipText = null;
+		private var hallo_world:MovieClipText	= null;
 		
 		/**
 		 * コンストラクタ

@@ -1,15 +1,17 @@
 package ConquestFlex
 {
-	
 	/**
 	 * @author jun-ueoka
 	 */
 	public class Debug
 	{
-		//デバッグON/OFF
+		/* デバッグON/OFF */
 		public static var on:Boolean = true;
 		
-		//trace出力
+		/**
+		 * trace出力
+		 * @param	in_obj
+		 */
 		public static function dTrace(in_obj:Object):void
 		{
 			if (on)
@@ -18,7 +20,10 @@ package ConquestFlex
 			}
 		}
 		
-		//error出力
+		/**
+		 * error出力
+		 * @param	in_obj
+		 */
 		public static function dError(in_obj:Object):void
 		{
 			if (on)

@@ -1,5 +1,6 @@
 package ConquestFlex.connect.loader
 {
+	import ConquestFlex.Debug;
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -8,26 +9,28 @@ package ConquestFlex.connect.loader
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.utils.ByteArray;
-	import ConquestFlex.Debug;
 	
 	/**
 	 * @author jun-ueoka
 	 */
 	public class HttpLoadBinary extends HttpConnectionLoader
 	{
+		/* URLローダー */
+		private var url_loader:URLLoader	= null;
+		/* イベント登録確認 */
+		private var event_on:Boolean		= false;
 		
-		//URLローダー
-		private var url_loader:URLLoader = null;
-		//イベント登録確認
-		private var event_on:Boolean = false;
-		
-		//コンストラクタ
+		/**
+		 * コンストラクタ
+		 */
 		public function HttpLoadBinary():void
 		{
 			super();
 		}
 		
-		//override関数　読み込み開始処理
+		/**
+		 * override関数　読み込み開始処理
+		 */
 		override protected function load():void
 		{
 			url_loader = new URLLoader();
@@ -39,7 +42,9 @@ package ConquestFlex.connect.loader
 			url_loader.load(request);
 		}
 		
-		//override関数　読み込み再開処理
+		/**
+		 * override関数　読み込み再開処理
+		 */
 		override protected function retry():void
 		{
 			removeEventListeners();
@@ -53,26 +58,35 @@ package ConquestFlex.connect.loader
 			url_loader.load(request);
 		}
 		
-		//override関数　読み込み切断処理
+		/**
+		 * override関数　読み込み切断処理
+		 */
 		override protected function close():void
 		{
 			url_loader.close();
 			removeEventListeners();
 		}
 		
-		//override関数　読み込み終了後処理
+		/**
+		 * override関数　読み込み終了後処理
+		 */
 		override protected function finish():void
 		{
 			removeEventListeners();
 		}
 		
-		//override関数　読み込み再開処理
+		/**
+		 * override関数　読み込み再開処理
+		 * @return
+		 */
 		override public function getData():Object
 		{
 			return (url_loader.data as ByteArray)
 		}
 		
-		//override関数　リスナー追加実行
+		/**
+		 * override関数　リスナー追加実行
+		 */
 		override protected function addEventListeners():void
 		{
 			if (!event_on)
@@ -90,7 +104,9 @@ package ConquestFlex.connect.loader
 			}
 		}
 		
-		//override関数　リスナー破棄実行
+		/**
+		 * override関数　リスナー破棄実行
+		 */
 		override protected function removeEventListeners():void
 		{
 			if (event_on)

@@ -1,52 +1,70 @@
 package ConquestFlex.connect
 {
-	import flash.utils.ByteArray;
 	import ConquestFlex.connect.loader.HttpConnectionLoader;
 	import ConquestFlex.connect.loader.HttpLoadBinary;
 	import ConquestFlex.connect.loader.HttpLoadImage;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * @author jun-ueoka
 	 */
 	public class HttpConnectionController
 	{
-		//ローダー識別フラグ
-		public static const LOAD_BINARY:int = 1; //バイナリ(テキスト)読み込み
-		public static const LOAD_IMAGE:int = 2; //画像読み込み
-		public static const LOAD_SOUND:int = 3; //音源読み込み
+		/* ローダー識別フラグ */
+		public static const LOAD_BINARY:int	= 1;	//バイナリ(テキスト)読み込み
+		public static const LOAD_IMAGE:int	= 2;	//画像読み込み
+		public static const LOAD_SOUND:int	= 3;	//音源読み込み
 		
-		//インスタンス
-		private static var instance:HttpConnectionController = null;
+		/* インスタンス */
+		private static var instance:HttpConnectionController	= null;
 		
-		//通信識別子
-		private static var request_key:Vector.<String> = new Vector.<String>;
-		//通信インスタンス
-		private static var request_loader:Vector.<HttpConnectionLoader> = new Vector.<HttpConnectionLoader>;
+		/* 通信識別子 */
+		private static var request_key:Vector.<String>			= new Vector.<String>;
+		/* 通信インスタンス */
+		private static var request_loader:Vector.<HttpConnectionLoader>	= new Vector.<HttpConnectionLoader>;
 		
-		//バイナリ読み込み識別子
-		private static var request_key_binary:Vector.<String> = new Vector.<String>;
-		//画像読み込み識別子
-		private static var request_key_image:Vector.<String> = new Vector.<String>;
-		//音源読み込み識別子
-		private static var request_key_sound:Vector.<String> = new Vector.<String>;
+		/* バイナリ読み込み識別子 */
+		private static var request_key_binary:Vector.<String>	= new Vector.<String>;
+		/* 画像読み込み識別子 */
+		private static var request_key_image:Vector.<String>	= new Vector.<String>;
+		/* 音源読み込み識別子 */
+		private static var request_key_sound:Vector.<String>	= new Vector.<String>;
 		
+		/**
+		 * 通信要求発行件数を取得
+		 * @return
+		 */
 		public function getTotalRequestCount():int
 		{
 			return request_loader.length;
 		}
 		
-		//画像読み込み識別子
+		/**
+		 * 画像読み込み識別子を取得
+		 * @return
+		 */
 		public function getRequestKyeImage():Vector.<String>
 		{
 			return request_key_image;
 		}
 		
+		/**
+		 * 画像読み込み識別子を初期化
+		 */
 		public function resetRequestKeyImage():void
 		{
 			request_key_image = new Vector.<String>();
 		}
 		
-		//通信要求発行
+		/**
+		 * 通信要求発行
+		 * @param	in_url
+		 * @param	in_data_type
+		 * @param	in_retry_count
+		 * @param	in_param
+		 * @param	in_method
+		 * @return
+		 */
 		static public function createLoader(in_url:String, in_data_type:int, in_retry_count:int, in_param:ByteArray, in_method:String):HttpConnectionLoader
 		{
 			var new_loader:HttpConnectionLoader = createLoaderClass(in_data_type);
@@ -54,7 +72,11 @@ package ConquestFlex.connect
 			return new_loader;
 		}
 		
-		//通信要求発行
+		/**
+		 * 通信要求発行
+		 * @param	in_data_type
+		 * @return
+		 */
 		static public function createLoaderClass(in_data_type:int):HttpConnectionLoader
 		{
 			var new_loader:HttpConnectionLoader = null;
@@ -74,7 +96,10 @@ package ConquestFlex.connect
 			return new_loader;
 		}
 		
-		//インスタンス取得
+		/**
+		 * インスタンス取得
+		 * @return
+		 */
 		static public function getInstance():HttpConnectionController
 		{
 			if (instance == null)
@@ -84,7 +109,16 @@ package ConquestFlex.connect
 			return instance;
 		}
 		
-		//通信要求発行
+		/**
+		 * 通信要求発行
+		 * @param	in_key
+		 * @param	in_url
+		 * @param	in_data_type
+		 * @param	in_retry_count
+		 * @param	in_param
+		 * @param	in_method
+		 * @return
+		 */
 		public function pushRequest(in_key:String, in_url:String, in_data_type:int, in_retry_count:int = 0, in_param:ByteArray = null, in_method:String = null):Boolean
 		{
 			//すでに登録されているキーのロードは発行しない
@@ -102,7 +136,11 @@ package ConquestFlex.connect
 			return false;
 		}
 		
-		//通信要求取得
+		/**
+		 * 通信要求取得 
+		 * @param	in_key
+		 * @return
+		 */
 		public function getRequest(in_key:String):Object
 		{
 			var index:int = getIndex(in_key);
@@ -113,28 +151,44 @@ package ConquestFlex.connect
 			return null;
 		}
 		
-		//通信要求エラー取得
+		/**
+		 * 通信要求エラー取得
+		 * @param	in_key
+		 * @return
+		 */
 		public function getError(in_key:String):int
 		{
 			var index:int = getIndex(in_key);
 			return request_loader[index].getError();
 		}
 		
-		//通信要求エラーテキスト取得
+		/**
+		 * 通信要求エラーテキスト取得
+		 * @param	in_key
+		 * @return
+		 */
 		public function getErrorText(in_key:String):String
 		{
 			var index:int = getIndex(in_key);
 			return request_loader[index].getErrorText();
 		}
 		
-		//通信要求結果判定
+		/**
+		 * 通信要求結果判定
+		 * @param	in_key
+		 * @return
+		 */
 		public function checkError(in_key:String):Boolean
 		{
 			var index:int = getIndex(in_key);
 			return checkErrorByIndex(index);
 		}
 		
-		//通信要求キー存在判定
+		/**
+		 * 通信要求キー存在判定
+		 * @param	in_key
+		 * @return
+		 */
 		public function checkKey(in_key:String):Boolean
 		{
 			var index:int = getIndex(in_key, false);
@@ -148,7 +202,11 @@ package ConquestFlex.connect
 			}
 		}
 		
-		//通信要求結果判定(インデックス参照)
+		/**
+		 * 通信要求結果判定(インデックス参照)
+		 * @param	in_index
+		 * @return
+		 */
 		public function checkErrorByIndex(in_index:int):Boolean
 		{
 			if (request_loader[in_index].isComplete())
@@ -165,7 +223,12 @@ package ConquestFlex.connect
 			return false;
 		}
 		
-		//通信要求キーによりインデックス値を取得
+		/**
+		 * 通信要求キーによりインデックス値を取得
+		 * @param	in_key
+		 * @param	in_throw
+		 * @return
+		 */
 		public function getIndex(in_key:String, in_throw:Boolean = true):int
 		{
 			var index:int = request_key.indexOf(in_key);
@@ -183,7 +246,15 @@ package ConquestFlex.connect
 			}
 		}
 		
-		//画像読み込み通信要求発行
+		/**
+		 * 画像読み込み通信要求発行
+		 * @param	in_key
+		 * @param	in_url
+		 * @param	in_retry_count
+		 * @param	in_param
+		 * @param	in_method
+		 * @return
+		 */
 		public function pushRequestLoadImage(in_key:String, in_url:String, in_retry_count:int = 0, in_param:ByteArray = null, in_method:String = null):Boolean
 		{
 			if (in_method == null)
@@ -198,5 +269,4 @@ package ConquestFlex.connect
 			return false;
 		}
 	}
-
 }

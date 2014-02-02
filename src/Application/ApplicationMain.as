@@ -6,6 +6,7 @@ package Application
 	import ConquestFlex.common.event.MouseEventController;
 	import ConquestFlex.common.useful.TopSprite;
 	import ConquestFlex.common.useful.UtilFont;
+	import ConquestFlex.Environment;
 	import ConquestFlex.graphics.GraphicShape;
 	import ConquestFlex.scene.SceneBase;
 	import ConquestFlex.scene.SceneControler;
@@ -13,25 +14,26 @@ package Application
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-	import ConquestFlex.Environment;
 	
 	/**
-	 * ...
-	 * @author Unknown
+	 * @author
 	 */
 	public class ApplicationMain extends TopSprite
 	{
-		//シーンコントローラ
-		private var scene_controler:SceneControler = SceneControler.createInstance(new SceneFactory());
-		//マウスコントローラー
-		private var mouse_event:MouseEventController = null;
-		//キーコントローラー
-		private var key_event:KeyEventController = null;
-		//エラーメッセージ
-		public var error_msg:Error = null;
-		//マスク
-		public var mask_shape:Shape = null;
+		/* シーンコントローラ */
+		private var scene_controler:SceneControler		= SceneControler.createInstance(new SceneFactory());
+		/* マウスコントローラー */
+		private var mouse_event:MouseEventController	= null;
+		/* キーコントローラー */
+		private var key_event:KeyEventController		= null;
+		/* エラーメッセージ */
+		public var error_msg:Error						= null;
+		/* マスク */
+		public var mask_shape:Shape						= null;
 		
+		/**
+		 * コンストラクタ
+		 */
 		public function ApplicationMain():void
 		{
 			//上記クラス初期化
@@ -45,6 +47,9 @@ package Application
 				addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
+		/**
+		 * 開始処理
+		 */
 		private function start():void
 		{
 			
@@ -73,12 +78,20 @@ package Application
 			scene_controler.push(SceneFactory.SCENE_MAIN);
 		}
 		
+		/**
+		 * 準備処理
+		 * @param	e
+		 */
 		private function init(e:Event = null):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 		}
 		
+		/**
+		 * メインループ処理
+		 * @param	e
+		 */
 		private function loop(e:Event = null):void
 		{
 			try
@@ -94,7 +107,10 @@ package Application
 			}
 		}
 		
-		//エラー発生時に定期的に行う処理
+		/**
+		 * エラー発生時に定期的に行う処理
+		 * @param	e
+		 */
 		public function error(e:Event):void
 		{
 			if (error_msg != null)
@@ -116,7 +132,9 @@ package Application
 			}
 		}
 		
-		//ゲームエフェクトの再生速度をセットする
+		/**
+		 * ゲームエフェクトの再生速度をセットする
+		 */
 		private function setPlaySpeed():void
 		{
 			var skip_type:Array = [1.0, 1.3, 1.5, Environment.SPEED_DEFOULT];

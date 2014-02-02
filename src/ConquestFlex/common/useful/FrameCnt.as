@@ -7,11 +7,11 @@ package ConquestFlex.common.useful
 	public class FrameCnt
 	{
 		/** フレームカウンタ */
-		public var cnt:int = 0;
+		public var cnt:int		= 0;
 		/** 最大フレーム */
-		private var max:int = 1;
+		private var max:int		= 1;
 		/** 最大フレーム到達リピート回数 */
-		private var repeat:int = 0;
+		private var repeat:int	= 0;
 		
 		/**
 		 * コンストラクタ

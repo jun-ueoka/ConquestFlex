@@ -1,32 +1,35 @@
 package ConquestFlex.connect.loader
 {
+	import ConquestFlex.Debug;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
-	import flash.net.URLLoader;
-	import ConquestFlex.Debug;
 	
 	/**
 	 * @author jun-ueoka
 	 */
 	public class HttpLoadImage extends HttpConnectionLoader
 	{
-		//URLローダー
-		private var img_loader:Loader = null;
-		//イベント登録確認
-		private var event_on:Boolean = false;
+		/* URLローダー */
+		private var img_loader:Loader	= null;
+		/* イベント登録確認 */
+		private var event_on:Boolean	= false;
 		
-		//コンストラクタ
+		/**
+		 * コンストラクタ
+		 */
 		public function HttpLoadImage():void
 		{
 			super();
 			super.b_error_check = false; //TODO 画像が読み込めて無くても空画像で続行
 		}
 		
-		//override関数　読み込み開始処理
+		/**
+		 * override関数　読み込み開始処理
+		 */
 		override protected function load():void
 		{
 			img_loader = new Loader();
@@ -37,7 +40,9 @@ package ConquestFlex.connect.loader
 			img_loader.load(request);
 		}
 		
-		//override関数　読み込み再開処理
+		/**
+		 * override関数　読み込み再開処理
+		 */
 		override protected function retry():void
 		{
 			removeEventListeners();
@@ -50,20 +55,27 @@ package ConquestFlex.connect.loader
 			img_loader.load(request);
 		}
 		
-		//override関数　読み込み切断処理
+		/**
+		 * override関数　読み込み切断処理
+		 */
 		override protected function close():void
 		{
 			img_loader.close();
 			removeEventListeners();
 		}
 		
-		//override関数　読み込み終了後処理
+		/**
+		 * override関数　読み込み終了後処理
+		 */
 		override protected function finish():void
 		{
 			removeEventListeners();
 		}
 		
-		//override関数　読み込み再開処理
+		/**
+		 * override関数　読み込み再開処理
+		 * @return
+		 */
 		override public function getData():Object
 		{
 			if (img_loader.content)
@@ -76,7 +88,9 @@ package ConquestFlex.connect.loader
 			}
 		}
 		
-		//override関数　リスナー追加実行
+		/**
+		 * override関数　リスナー追加実行
+		 */
 		override protected function addEventListeners():void
 		{
 			if (!event_on)
@@ -93,7 +107,9 @@ package ConquestFlex.connect.loader
 			}
 		}
 		
-		//override関数　リスナー破棄実行
+		/**
+		 * override関数　リスナー破棄実行
+		 */
 		override protected function removeEventListeners():void
 		{
 			if (event_on)

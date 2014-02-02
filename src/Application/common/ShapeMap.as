@@ -12,7 +12,12 @@ package Application.common
 	public class ShapeMap extends ObjectMap
 	{
 		/** 共通インスタンス */
-		static private var instance:ShapeMap = null;
+		static private var instance:ShapeMap	= null;
+		
+		/** アクセスキー：黒シェープ */
+		static public const KEY_BLACK1:String	= "black1";
+		/** アクセスキー：グラデーションシェープ*/
+		static public const KEY_GRAD1:String	= "grad1";
 		
 		/**
 		 * コンストラクタ
@@ -33,7 +38,7 @@ package Application.common
 			tmp.graphics.lineTo(50, 0);
 			tmp.graphics.lineTo(0, 0);
 			tmp.graphics.endFill();
-			this.setObj(tmp, 'mask2');
+			this.setObj(tmp, KEY_BLACK1);
 			
 			//グラデーションシェープ
 			tmp = new Shape();
@@ -46,7 +51,7 @@ package Application.common
 			tmp.graphics.lineTo(50, -25);
 			tmp.graphics.lineTo(0, -25);
 			tmp.graphics.endFill();
-			this.setObj(tmp, 'damage1');
+			this.setObj(tmp,　KEY_GRAD1);
 		
 		}
 		
